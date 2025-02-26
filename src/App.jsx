@@ -10,6 +10,7 @@ import ClassSchedule from "./components/ClassSchedule";
 import CourseAnalytics from "./components/CourseAnalytics";
 import ResearchTracker from "./components/ResearchTracke";
 import ErrorBoundary from "./components/ErrorBoundary";
+import Home from "./components/Home";
 
 const Layout = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -206,6 +207,126 @@ const analyticsData = {
     'F': 2
   }
 };
+const dashboardData = {
+  studentInfo: {
+    name: "Alex Johnson",
+    id: "STU2024001",
+    course: "Computer Science",
+    semester: "6th Semester",
+    attendance: 92
+  },
+  upcomingExams: [
+    {
+      id: 1,
+      subject: "Advanced Database Systems",
+      date: "2024-04-15",
+      time: "10:00 AM",
+      venue: "Hall A",
+      type: "Final Exam"
+    },
+    {
+      id: 2,
+      subject: "Machine Learning",
+      date: "2024-04-18",
+      time: "02:00 PM",
+      venue: "Lab 201",
+      type: "Practical"
+    },
+    {
+      id: 3,
+      subject: "Software Engineering",
+      date: "2024-04-20",
+      time: "09:00 AM",
+      venue: "Hall B",
+      type: "Mid Term"
+    }
+  ],
+  recentGrades: [
+    {
+      id: 1,
+      subject: "Web Development",
+      grade: "A",
+      percentage: 92,
+      status: "excellent"
+    },
+    {
+      id: 2,
+      subject: "Data Structures",
+      grade: "A-",
+      percentage: 88,
+      status: "good"
+    },
+    {
+      id: 3,
+      subject: "Computer Networks",
+      grade: "B+",
+      percentage: 85,
+      status: "good"
+    }
+  ],
+  feeStatus: {
+    currentDue: 1200,
+    lastPaid: 3000,
+    lastPaymentDate: "2024-03-01",
+    nextDueDate: "2024-04-15",
+    paymentHistory: [
+      { month: "March", amount: 3000, status: "paid" },
+      { month: "February", amount: 3000, status: "paid" },
+      { month: "January", amount: 3000, status: "paid" }
+    ]
+  },
+  events: [
+    {
+      id: 1,
+      title: "Tech Symposium 2024",
+      date: "2024-04-25",
+      type: "academic",
+      location: "Main Auditorium",
+      description: "Annual technology showcase and project presentations"
+    },
+    {
+      id: 2,
+      title: "Career Fair",
+      date: "2024-05-02",
+      type: "career",
+      location: "University Campus",
+      description: "Meet with industry recruiters and companies"
+    },
+    {
+      id: 3,
+      title: "Sports Day",
+      date: "2024-04-30",
+      type: "sports",
+      location: "Sports Complex",
+      description: "Annual sports competition"
+    }
+  ],
+  announcements: [
+    {
+      id: 1,
+      title: "Holiday Notice",
+      date: "2024-03-20",
+      priority: "high",
+      message: "Campus will remain closed on April 1st for maintenance"
+    },
+    {
+      id: 2,
+      title: "Library Hours Extended",
+      date: "2024-03-19",
+      priority: "medium",
+      message: "Library will remain open till 10 PM during exam week"
+    }
+  ],
+  attendance: {
+    present: 85,
+    absent: 8,
+    leave: 7,
+    lastUpdated: "2024-03-20"
+  }
+};
+
+// In your Router:
+
 
 
 // In your Router:
@@ -219,6 +340,10 @@ const appRouter = createBrowserRouter([
     errorElement: <ErrorBoundary />, // Add an error boundary
     children: [
       // ... existing code ...
+      {
+        index:true,
+        element:<Home data={dashboardData}/>
+      },
       { path: "/class-schedule", element: <ClassSchedule 
         schedules={[
           {
