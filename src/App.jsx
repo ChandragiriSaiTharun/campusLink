@@ -9,6 +9,7 @@ import AtAGlanceMetrics from "./components/AtAGlanceMetrics";
 import ClassSchedule from "./components/ClassSchedule";
 import CourseAnalytics from "./components/CourseAnalytics";
 import ResearchTracker from "./components/ResearchTracke";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const Layout = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -65,17 +66,28 @@ const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    errorElement: <ErrorBoundary />, // Add an error boundary
     children: [
-      { path: "class-schedule", element: <ClassSchedule/> },
-      { path: "at-a-glance-metrics", element: <AtAGlanceMetrics  upcomingClasses={["Math 101", "Physics 202"]}
-      unansweredQueries={5}
-      pendingAnnouncements={2}
-      performanceTrends={75}/> },
-      { path: "announcement-creator", element: <AnnouncementCreater /> },
-      { path: "assignment-grading-hub", element: <AssignmentGradingHub /> },
-      { path: "CourseAnalytics", element:<CourseAnalytics/>},
-      { path: "discussion-forum-moderator", element:<DiscussionForumModerator/>},
-      { path: "research-tracker", element: <ResearchTracker /> },
+      { path: "/class-schedule", element: <ClassSchedule /> },
+      { path: "/at-a-glance-metrics", element: <AtAGlanceMetrics upcomingClasses={["Math 101", "Physics 202"]} unansweredQueries={5} pendingAnnouncements={2} performanceTrends={75} /> },
+      { path: "/announcement-creator", element: <AnnouncementCreater /> },
+      { path: "/assignment-grading-hub", element: <AssignmentGradingHub /> },
+      { path: "/course-analytics", element: <CourseAnalytics /> },
+      {
+        path: "/discussion-forum-moderator",
+        element: (
+          <DiscussionForumModerator
+            threads={[
+              { id: 1, title: "Thread 1", pinned: false, resolved: false },
+              { id: 2, title: "Thread 2", pinned: true, resolved: false },
+              { id: 3, title: "Thread 3", pinned: false, resolved: true },
+            ]}
+            onPinThread={(id) => console.log(`Pinned thread ${id}`)}
+            onResolveQuery={(id) => console.log(`Resolved thread ${id}`)}
+          />
+        ),
+      },
+      { path: "/research-tracker", element: <ResearchTracker /> },
     ],
   },
 ]);
